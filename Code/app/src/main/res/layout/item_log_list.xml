@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_7sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvDate"
+        android:textSize="@dimen/_12ssp"
+        android:visibility="gone"
+        android:paddingHorizontal="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/lexend_regular"
+        android:text="today"
+        android:paddingTop="@dimen/_2sdp"
+        android:paddingBottom="@dimen/_7sdp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/bgView"
+        android:background="@color/white"
+        android:minHeight="@dimen/_35sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/tvDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTime"
+        android:textSize="@dimen/_11ssp"
+        android:paddingHorizontal="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="@id/bgView"
+        app:layout_constraintTop_toTopOf="@id/bgView"
+        app:layout_constraintBottom_toBottomOf="@id/bgView"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/lexend_regular"
+        android:text="10:25:32"
+        android:paddingVertical="@dimen/_10sdp"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvStatus"
+        android:textSize="@dimen/_11ssp"
+        android:paddingHorizontal="@dimen/_10sdp"
+        app:layout_constraintStart_toEndOf="@id/tvTime"
+        app:layout_constraintEnd_toEndOf="@id/bgView"
+        app:layout_constraintTop_toTopOf="@id/bgView"
+        app:layout_constraintBottom_toBottomOf="@id/bgView"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/lexend_regular"
+        android:text="smoke"
+        android:paddingVertical="@dimen/_10sdp"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
