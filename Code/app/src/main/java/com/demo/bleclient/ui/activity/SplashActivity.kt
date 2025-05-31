@@ -26,8 +26,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate) {
 
-
-
     override fun initView() {
         binding.btnGoToNextScreen.setOnClickListener {
             checkPermissionsForBluetoothAndLocation {

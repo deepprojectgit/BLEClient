@@ -21,11 +21,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.demo.bleclient.R
 import com.demo.bleclient.base.BaseActivity
 import com.demo.bleclient.ble.BleClient
-import com.demo.bleclient.data.model.BleEvent
 import com.demo.bleclient.receiver.BluetoothReceiver
 import com.demo.bleclient.databinding.ActivityScanBinding
 import com.demo.bleclient.ui.adaptor.BleDeviceAdaptor
-import com.demo.bleclient.utils.GlobalEventBus
 import com.demo.bleclient.utils.KEY_ADDRESS
 import com.demo.bleclient.utils.StatusBLEConnection
 import com.demo.bleclient.utils.UtilsFunc
@@ -159,7 +157,6 @@ class ScanActivity : BaseActivity<ActivityScanBinding>(ActivityScanBinding::infl
             menuItem  = menu?.findItem(R.id.action_power)
             if(!isScanProcessStart){
                 updatePowerIcon(menuItem)
-                GlobalEventBus.eventDevice.tryEmit(BleEvent(isStartScan = true))
             }else{
                 Toast.makeText(this@ScanActivity,"Scanning process working please wait",Toast.LENGTH_SHORT).show()
             }

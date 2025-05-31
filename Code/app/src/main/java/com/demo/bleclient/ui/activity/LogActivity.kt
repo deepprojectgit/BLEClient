@@ -13,12 +13,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demo.bleclient.R
 import com.demo.bleclient.base.BaseActivity
-import com.demo.bleclient.data.model.BleEvent
 import com.demo.bleclient.databinding.ActivityLogBinding
 import com.demo.bleclient.databinding.ActivityScanBinding
 import com.demo.bleclient.ui.adaptor.BleDeviceAdaptor
 import com.demo.bleclient.ui.adaptor.LogListAdaptor
-import com.demo.bleclient.utils.GlobalEventBus
 import com.demo.bleclient.utils.KEY_ADDRESS
 import com.demo.bleclient.viewmodel.LogViewModel
 import dagger.hilt.android.AndroidEntryPoint
