@@ -41,8 +41,6 @@ class LogActivity : BaseActivity<ActivityLogBinding>(ActivityLogBinding::inflate
 
         strAddress = intent.getStringExtra(KEY_ADDRESS)?:""
 
-        Log.e("StrAddress",strAddress+" "+" New  Address")
-
         binding.rvDevices.apply {
             this.adapter = logListAdaptor
             this.layoutManager = LinearLayoutManager(this@LogActivity)
@@ -62,7 +60,6 @@ class LogActivity : BaseActivity<ActivityLogBinding>(ActivityLogBinding::inflate
     }
 
     private fun setObserver(){
-
         logViewModel.mDoorLiveData(strAddress).observe(this@LogActivity) {
             logListAdaptor.updateList(it)
             if(it.isNotEmpty()){

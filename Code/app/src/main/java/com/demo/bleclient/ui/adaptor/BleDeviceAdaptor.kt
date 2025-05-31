@@ -19,7 +19,7 @@ class BleDeviceAdaptor (val positiveButtonClick : (bleDevice:BluetoothDevice) ->
 
     @SuppressLint("MissingPermission")
     override fun onBind(binding: ItemDevicesBinding, item: BluetoothDevice, position: Int) {
-        binding.tvDeviceName.text = item.name
+        binding.tvDeviceName.text = if(item.name.isNullOrEmpty()) "--" else item.name
         binding.tvDeviceAddress.text = item.address
 
         binding.root.setOnClickListener {

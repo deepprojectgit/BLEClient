@@ -3,6 +3,7 @@ package com.demo.bleclient.di
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase.QueryCallback
+import com.demo.bleclient.ble.BleClient
 import com.demo.bleclient.data.dao.LogDao
 import com.demo.bleclient.data.db.AppDatabase
 import com.demo.bleclient.data.repository.LogRepository
@@ -35,4 +36,7 @@ object Module {
     fun provideDao(appDatabase: AppDatabase) : LogDao = appDatabase.logDao()
 
 
+    @Provides
+    @Singleton
+    fun provideBLEClient(context: Context,logDao: LogDao) : BleClient = BleClient(context,logDao)
 }

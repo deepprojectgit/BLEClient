@@ -18,15 +18,23 @@ import android.os.Handler
 import android.os.Looper
 import android.os.ParcelUuid
 import android.util.Log
-import com.demo.bleclient.data.model.EventModel
+import com.demo.bleclient.data.dao.LogDao
 import com.demo.bleclient.data.model.LogEntity
 import java.util.UUID
 import com.demo.bleclient.utils.StatusBLEConnection
 import com.demo.bleclient.utils.decodeToStringOrFallback
-import com.demo.bleclient.utils.fromJson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import javax.inject.Singleton
 
 
-class BleClient(val context: Context) {
+@Singleton
+class BleClient (val context: Context,dao: LogDao) {
 
     var bleScanner : BluetoothLeScanner
     var bleAdapter : BluetoothAdapter
@@ -79,11 +87,6 @@ class BleClient(val context: Context) {
         bleScanner = bleAdapter.bluetoothLeScanner
         handler = Handler(Looper.getMainLooper())
     }
-
-    fun getBleAdaptor(): BluetoothAdapter {
-        return bleAdapter
-    }
-
 
     @SuppressLint("MissingPermission")
     fun startScan() {
@@ -160,13 +163,11 @@ class BleClient(val context: Context) {
 
         override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic) {
             val value = characteristic.value
-            val dataEvent = value.decodeToStringOrFallback().fromJson<EventModel>()
-            val logEntity = LogEntity(deviceAddress=gatt.device.address, logDate = dataEvent.date, logTime = dataEvent.time, logType = dataEvent.type)
-            onCheckBluetooth?.invoke(
-                null,
-                null,
-                logEntity
-            )
+            val dataEvent = value.decodeToStringOrFallback()
+            val logEntity = LogEntity(deviceAddress=gatt.device.address, logDate = currentDate(), logTime = currentTime(), logType = dataEvent)
+            CoroutineScope(Dispatchers.IO).launch {
+                dao.insert(logEntity)
+            }
         }
 
         // Optional: check notification write response
@@ -193,4 +194,17 @@ class BleClient(val context: Context) {
         bluetoothGatt?.close()
         bluetoothGatt = null
     }
+
+    fun currentDate():String{
+        val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val currentDate = sdf.format(Date())
+        return currentDate
+    }
+
+    fun currentTime():String{
+        val sdf = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        val currentDate = sdf.format(Date())
+        return currentDate
+    }
+
 }
